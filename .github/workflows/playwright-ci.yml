@@ -6,6 +6,18 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Select test suite to run'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - api
+          - ui
+          - all
 
 jobs:
   test:
@@ -27,8 +39,23 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run smoke tests
-        run: npx playwright test --grep @smoke
+      - name: Run selected Playwright tests
+  run: |
+    if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+      if [ "${{ github.event.inputs.test_suite }}" = "smoke" ]; then
+        npx playwright test --grep @smoke
+      elif [ "${{ github.event.inputs.test_suite }}" = "regression" ]; then
+        npx playwright test --grep @regression
+      elif [ "${{ github.event.inputs.test_suite }}" = "api" ]; then
+        npx playwright test --grep @api
+      elif [ "${{ github.event.inputs.test_suite }}" = "ui" ]; then
+        npx playwright test --grep @ui
+      elif [ "${{ github.event.inputs.test_suite }}" = "all" ]; then
+        npx playwright test
+      fi
+    else
+      npx playwright test --grep @smoke
+    fi
 
       - name: Upload Playwright HTML report
         if: always()
