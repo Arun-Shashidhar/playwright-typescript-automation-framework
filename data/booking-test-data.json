@@ -1,0 +1,13 @@
+{
+  "validBooking": {
+    "firstname": "abc",
+    "lastname": "Tester",
+    "totalprice": 150,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2026-07-01",
+      "checkout": "2026-07-05"
+    },
+    "additionalneeds": "Breakfast"
+  }
+}
