@@ -3,8 +3,10 @@ name: Playwright CI
 on:
   push:
     branches: [ main ]
+
   pull_request:
     branches: [ main ]
+
   workflow_dispatch:
     inputs:
       test_suite:
@@ -38,9 +40,10 @@ jobs:
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+
       - name: Run selected Playwright tests
         run: |
-        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             if [ "${{ github.event.inputs.test_suite }}" = "smoke" ]; then
               npx playwright test --grep @smoke
             elif [ "${{ github.event.inputs.test_suite }}" = "regression" ]; then
