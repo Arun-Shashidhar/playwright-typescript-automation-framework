@@ -3,7 +3,7 @@ import { BookingApiClient } from '../../integrations/api/BookingApiClient';
 import bookingTestData from '../../data/booking-test-data.json';
 import { Logger } from '../../utils/logger';
 
-test('@smoke @api should get booking ids', async ({ request }) => {
+test('@smoke @api RB-102 should get booking ids', async ({ request }) => {
   const bookingApiClient = new BookingApiClient(request);
 
   const response = await bookingApiClient.getBookingIds();
@@ -16,7 +16,7 @@ test('@smoke @api should get booking ids', async ({ request }) => {
   expect(responseBody.length).toBeGreaterThan(0);
 });
 
-test('@regression @api should create a new booking', async ({ request }) => {
+test('@regression @api RB-103 should create a new booking', async ({ request }) => {
   Logger.info('Creating a new booking using API');
 
   const bookingApiClient = new BookingApiClient(request);
