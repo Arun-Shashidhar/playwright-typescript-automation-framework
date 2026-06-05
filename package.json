@@ -5,7 +5,8 @@
   "main": "index.js",
     "scripts": {
     "test": "npx playwright test",
-    "jira:preview": "tsx scripts/preview-jira-comments.ts"
+    "jira:preview": "tsx scripts/preview-jira-comments.ts",
+    "jira:publish": "tsx scripts/publish-jira-comments.ts"
   },
   "keywords": [],
   "author": "",
